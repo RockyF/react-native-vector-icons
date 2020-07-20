@@ -36,7 +36,7 @@ NSString *const RNVIErrorDomain = @"org.oblador.react-native-vector-icons";
 @synthesize bridge = _bridge;
 RCT_EXPORT_MODULE();
 
-- (NSString *)hexStringFromColor:(UIColor *)color
+- (NSString *)hexStringFromColor:(NSColor *)color
 {
   const CGFloat *components = CGColorGetComponents(color.CGColor);
 
@@ -52,10 +52,10 @@ RCT_EXPORT_MODULE();
 
 - (NSString *)generateFilePath:(NSString *)glyph withFontName:(NSString *)fontName
                                                  withFontSize:(CGFloat)fontSize
-                                                 withColor:(UIColor *)color
+                                                 withColor:(NSColor *)color
                                                  withExtraIdentifier:(NSString *)identifier
 {
-  CGFloat screenScale = RCTScreenScale();
+	CGFloat screenScale = 1;//RCTScreenScale();
   NSString *hexColor = [self hexStringFromColor:color];
   NSString *fileName = [NSString stringWithFormat:@"%@RNVectorIcons_%@_%@_%hu_%.f%@@%.fx.png",
                                                   NSTemporaryDirectory(),
@@ -68,7 +68,7 @@ RCT_EXPORT_MODULE();
 
 - (BOOL)createAndSaveGlyphImage:(NSString *)glyph withFont:(UIFont *)font
                                                   withFilePath:(NSString *)filePath
-                                                  withColor:(UIColor *)color
+                                                  withColor:(NSColor *)color
 {
   if(![[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
     // No cached icon exists, we need to create it and persist to disk
@@ -92,7 +92,7 @@ RCT_EXPORT_MODULE();
 - (NSString *)createGlyphImagePathForFont:(NSString *)fontName
                                 withGlyph:(NSString *)glyph
                                 withFontSize:(CGFloat)fontSize
-                                withColor:(UIColor *)color
+                                withColor:(NSColor *)color
                                 withError:(NSError **)error
 {
   UIFont *font = [UIFont fontWithName:fontName size:fontSize];
@@ -116,7 +116,7 @@ RCT_EXPORT_METHOD(
   getImageForFont:(NSString *)fontName
   withGlyph:(NSString *)glyph
   withFontSize:(CGFloat)fontSize
-  withColor:(UIColor *)color
+  withColor:(NSColor *)color
   resolver:(RCTPromiseResolveBlock)resolve
   rejecter:(RCTPromiseRejectBlock)reject
 ) {
@@ -137,7 +137,7 @@ RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(
   getImageForFontSync:(NSString *)fontName
   withGlyph:(NSString *)glyph
   withFontSize:(CGFloat)fontSize
-  withColor:(UIColor *)color
+  withColor:(NSColor *)color
 ) {
   NSError *error = nil;
   return [self createGlyphImagePathForFont:fontName

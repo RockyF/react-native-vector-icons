@@ -25,13 +25,13 @@ enum {
 
 @interface RNVectorIconsManager : NSObject <RCTBridgeModule>
 
-- (NSString *)hexStringFromColor:(UIColor *)color;
+- (NSString *)hexStringFromColor:(NSColor *)color;
 - (NSString *)generateFilePath:(NSString *)glyph withFontName:(NSString *)fontName
                                                  withFontSize:(CGFloat)fontSize
-                                                 withColor:(UIColor *)color
+                                                 withColor:(NSColor *)color
                                                  withExtraIdentifier:(NSString *)identifier;
 - (BOOL)createAndSaveGlyphImage:(NSString *)glyph withFont:(UIFont *)font
                                                   withFilePath:(NSString *)filePath
-                                                  withColor:(UIColor *)color;
+                                                  withColor:(NSColor *)color;
 
 @end
